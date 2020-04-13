@@ -8,36 +8,38 @@ import { KubeResourceType, KubeServiceBase } from "@azurepipelines/webapp-kube-s
 // todo :: add  'implements IImageService' to this class once we have the package
 export class PageDataService extends KubeServiceBase {
     public fetch(resourceType: KubeResourceType, labelSelector?: string): Promise<any> {
+        let baseUrl : string = "https://kubedataservice.azurewebsites.net/api/GetKubeData?operation=";
         let url: string = "";
         switch (resourceType) {
             case KubeResourceType.Pods:
-                url = "/getpods";
+                url = "getpods";
                 break;
             case KubeResourceType.Services:
-                url = "/getservices";
+                url = "getservices";
                 break;
             case KubeResourceType.Deployments:
-                url = "/getdeployments";
+                url = "getdeployments";
                 break;
             case KubeResourceType.ReplicaSets:
-                url = "/getreplicasets";
+                url = "getreplicasets";
                 break;
 
             case KubeResourceType.DaemonSets:
-                url = "/getdaemonsets";
+                url = "getdaemonsets";
                 break;
 
             case KubeResourceType.StatefulSets:
-                url = "/getstatefulsets";
+                url = "getstatefulsets";
                 break;
 
             default:
                 return Promise.resolve([]);
         }
+
+        url = baseUrl.concat(url);
         if (labelSelector) {
             url = url.concat("/?labelselector=", encodeURIComponent(labelSelector));
         }
-
         console.log(url);
         return this._populateEntities(url);
     }
