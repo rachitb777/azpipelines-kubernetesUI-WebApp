@@ -17,7 +17,7 @@ class Summary extends React.Component<{}, { clusterName: string }> {
     public constructor(props: {}) {
         super(props);
         this.state = { clusterName: "" };
-        fetch("/clusterName").then(res => res.json().then(val => this.setState({ clusterName: val.clusterName })));
+        fetch("https://kubedataservice.azurewebsites.net/api/GetKubeData?operation=getclustername").then(res => res.json().then(val => this.setState({ clusterName: val.clusterName })));
     }
 
     public render(): JSX.Element {

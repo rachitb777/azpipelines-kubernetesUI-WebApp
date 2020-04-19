@@ -38,7 +38,7 @@ export class PageDataService extends KubeServiceBase {
 
         url = baseUrl.concat(url);
         if (labelSelector) {
-            url = url.concat("/?labelselector=", encodeURIComponent(labelSelector));
+            url = url.concat("&labelselector=", encodeURIComponent(labelSelector));
         }
         console.log(url);
         return this._populateEntities(url);
@@ -186,7 +186,7 @@ export class PageDataService extends KubeServiceBase {
     }
 
     public getPodLog(podName: string, podContainerName?: string): Promise<string> {
-        const url: string = "/getpodlog/?podName=" + encodeURIComponent(podName) + "&podContainerName=" + encodeURIComponent(podContainerName || "");
+        const url: string = "https://kubedataservice.azurewebsites.net/api/GetKubeData?operation=getpodlog&podName=" + encodeURIComponent(podName) + "&podContainerName=" + encodeURIComponent(podContainerName || "");
         return fetch(url).then(res => res.text());
     }
 
