@@ -8,7 +8,7 @@ import { KubeResourceType, KubeServiceBase } from "@azurepipelines/webapp-kube-s
 // todo :: add  'implements IImageService' to this class once we have the package
 export class PageDataService extends KubeServiceBase {
     public fetch(resourceType: KubeResourceType, labelSelector?: string): Promise<any> {
-        let baseUrl : string = "https://kubedataservice.azurewebsites.net/api/GetKubeData?operation=";
+        let baseUrl : string = "https://kubedataservice.azurewebsites.net/api/getKubeDataAuth?resource=rbk8s&resourceGroup=rachitb-acr&subscriptionId=c00d16c7-6c1f-4c03-9be1-6934a4c49682&operation=";
         let url: string = "";
         switch (resourceType) {
             case KubeResourceType.Pods:
